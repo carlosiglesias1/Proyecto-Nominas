@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-        
+        static Scanner teclado = new Scanner(System.in);
 
         static float[] cortarConstructorNomina(String textoConstructor) {
                 float[] parametrosPrincipales = new float[4];
@@ -37,11 +37,36 @@ public class Main {
                                 Float.parseFloat(textoConstructor.substring(textoConstructor.lastIndexOf("/") + 1)) };
         }
 
+        static void añadirComplementos(int numeroComplementos, Nomina nomina) {
+                for (int i = 0; i < numeroComplementos; i++) {
+                        System.out.println("Ahora introduce el complementos [tipo_importe_ParteDeCotizacion]");
+                        String textoConstructor = teclado.nextLine();
+
+                        if (!textoConstructor.equals("") && nomina.addComplemento(crearComplemento(textoConstructor)))
+                                System.out.println("Complemento añadido");
+                        else
+                                System.out.println("Complemento no añadido");
+                }
+        }
+
+        static void printData (Nomina nomina, String textoConstructor){
+                System.out.printf("PPE: %.2f%n", nomina.pPE());
+                System.out.printf("Total Devengado: %.2f%n", nomina.totalDevengado());
+                System.out.printf("Complementos que cotizan: %.2f%n", nomina.getComplementosCotizan());
+                System.out.printf("Remuneracion Mensual: %.2f%n", nomina.remuneracionMensual());
+                System.out.printf("BCCC: %.2f%n", nomina.baseCCC());
+                System.out.printf("BCCP: %.2f%n", nomina.baseCCP());
+                System.out.printf("Seguridad Social: %.2f%n",
+                                nomina.seguridadSocial(porcentajesCotizacion(textoConstructor)[1],
+                                                porcentajesCotizacion(textoConstructor)[2],
+                                                porcentajesCotizacion(textoConstructor)[3],
+                                                porcentajesCotizacion(textoConstructor)[4]));
+                System.out.printf("IRPF: %.2f%n", nomina.irpf(porcentajesCotizacion(textoConstructor)[0]));
+        }
+
         public static void main(String[] args) {
                 Nomina nomina;
                 String textoConstructor = "";
-                int numeroComplementos = 0;
-                Scanner teclado = new Scanner(System.in);
                 System.out.println(
                                 "Hola! Introduce los parámetros de la nómina [sueldoBase_plusDeCombenio_ImporteHorasExtras//PagasExtras]");
                 textoConstructor = teclado.nextLine();
@@ -51,32 +76,14 @@ public class Main {
                                 (int) (cortarConstructorNomina(textoConstructor)[3]));
 
                 System.out.println("Cuántos complementos tiene la nómina?");
-                numeroComplementos = teclado.nextInt();
-                for (int i = 0; i < numeroComplementos; i++) {
-                        System.out.println("Ahora introduce el complementos [tipo_importe_ParteDeCotizacion]");
-                        textoConstructor = teclado.nextLine();
-
-                        if (!textoConstructor.equals("") && nomina.addComplemento(crearComplemento(textoConstructor)))
-                                System.out.println("Complemento añadido");
-                        else
-                                System.out.println("Complemento no añadido");
-                }
+                añadirComplementos(Integer.parseInt(teclado.nextLine()), nomina);
 
                 System.out.println("Con que porcentajes tengo que trabajar? [IRPF_BCCC_Paro/FP/HE]");
                 textoConstructor = teclado.nextLine();
 
-                System.out.println(nomina.pPE());
-                System.out.println(nomina.totalDevengado());
-                System.out.println(nomina.getComplementosCotizan());
-                System.out.println(nomina.remuneracionMensual());
-                System.out.println(nomina.baseCCC());
-                System.out.println(nomina.baseCCP());
-                System.out.println(nomina.seguridadSocial(porcentajesCotizacion(textoConstructor)[1],
-                                porcentajesCotizacion(textoConstructor)[2], porcentajesCotizacion(textoConstructor)[3],
-                                porcentajesCotizacion(textoConstructor)[4]));
-                System.out.println(nomina.irpf(porcentajesCotizacion(textoConstructor)[0]));
+                printData(nomina, textoConstructor);
 
-                System.out.printf("El sueldo neto de esta persona es de %.2f", nomina.salarioNeto(
+                System.out.printf("El sueldo neto de esta persona es de %.2f%n", nomina.salarioNeto(
                                 porcentajesCotizacion(textoConstructor)[0], porcentajesCotizacion(textoConstructor)[1],
                                 porcentajesCotizacion(textoConstructor)[2], porcentajesCotizacion(textoConstructor)[3],
                                 porcentajesCotizacion(textoConstructor)[4]));
