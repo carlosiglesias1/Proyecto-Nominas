@@ -34,9 +34,7 @@ public class Main {
                                                 textoConstructor.lastIndexOf("_"))),
                                 Float.parseFloat(textoConstructor.substring(textoConstructor.lastIndexOf("_") + 1,
                                                 textoConstructor.indexOf("/"))),
-                                Float.parseFloat(textoConstructor.substring(textoConstructor.indexOf("/") + 1,
-                                                textoConstructor.lastIndexOf("/"))),
-                                Float.parseFloat(textoConstructor.substring(textoConstructor.lastIndexOf("/") + 1)) };
+                                Float.parseFloat(textoConstructor.substring(textoConstructor.indexOf("/") + 1)) };
         }
 
         static void añadirComplementos(int numeroComplementos, Nomina nomina) {
@@ -58,10 +56,10 @@ public class Main {
                 System.out.printf("Remuneracion Mensual: %.2f%n", nomina.remuneracionMensual());
                 System.out.printf("BCCC: %.2f%n", nomina.baseCCC());
                 System.out.printf("BCCP: %.2f%n", nomina.baseCCP());
-                System.out.printf("Seguridad Social: %.2f%n", nomina.seguridadSocial(
-                                porcentajesCotizacion(textoConstructor)[1], porcentajesCotizacion(textoConstructor)[2],
-                                porcentajesCotizacion(textoConstructor)[3], porcentajesCotizacion(textoConstructor)[4],
-                                porcentajesCotizacion(textoConstructor)[5]));
+                System.out.printf("Seguridad Social: %.2f%n",
+                                nomina.seguridadSocial(porcentajesCotizacion(textoConstructor)[1],
+                                                porcentajesCotizacion(textoConstructor)[2],
+                                                porcentajesCotizacion(textoConstructor)[3], 0.02f, 0.047f));
                 System.out.printf("IRPF: %.2f%n", nomina.irpf(porcentajesCotizacion(textoConstructor)[0]));
         }
 
