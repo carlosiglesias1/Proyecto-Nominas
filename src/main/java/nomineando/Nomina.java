@@ -12,16 +12,16 @@ import java.util.ArrayList;
 
 public class Nomina {
     private float sueldoBase;
+    private float plus;
     private int numExtras;
     private float horasExtras;
-    private float plus;
     private ArrayList<Complemento> complementos = new ArrayList<Complemento>();
 
     public Nomina(float sueldo, float plus, float extras, int numPagasExtras) {
         this.sueldoBase = sueldo;
-        this.horasExtras = extras;
-        this.numExtras= numPagasExtras;
         this.plus = plus;
+        this.horasExtras = extras;
+        this.numExtras = numPagasExtras;
     }
 
     public boolean addComplemento(Complemento complemento) {
@@ -37,14 +37,14 @@ public class Nomina {
 
     public float totalDevengado() {
         float total = 0.0f;
-        total += this.sueldoBase + this.horasExtras;
+        total += this.sueldoBase + this.horasExtras + this.plus;
         for (int i = 0; i < complementos.size(); i++) {
             total += complementos.get(i).getDinero();
         }
         return total;
     }
 
-    private float getComplementosCotizan() {
+    public float getComplementosCotizan() {
         float total = 0.0f;
         for (int i = 0; i < this.complementos.size(); i++) {
             total += this.complementos.get(i).getCotizacion();
@@ -53,29 +53,29 @@ public class Nomina {
     }
 
     public float remuneracionMensual() {
-        return this.sueldoBase + getComplementosCotizan();
+        return (this.sueldoBase + getComplementosCotizan());
     }
 
     public float baseCCC() {
-        return this.remuneracionMensual() + this.getComplementosCotizan();
+        return this.remuneracionMensual() + this.pPE();
     }
 
     public float baseCCP() {
-        return this.baseCCC() + horasExtras;
+        return (this.baseCCC() + horasExtras);
     }
 
     public float seguridadSocial(float porcentajeBCCC, float porcentajeParo, float porcentajeFP, float porcentajeHE) {
-        return this.baseCCC() * porcentajeBCCC + this.baseCCP() * porcentajeParo + this.baseCCP() * porcentajeFP
-                + this.horasExtras * porcentajeHE;
+        return (this.baseCCC() * porcentajeBCCC + this.baseCCP() * porcentajeParo + this.baseCCP() * porcentajeFP
+                + this.horasExtras * porcentajeHE);
     }
 
     public float irpf(float porcentajeIRPF) {
-        return (this.sueldoBase + this.plus + this.horasExtras + this.getComplementosCotizan()) * porcentajeIRPF;
+        return ((this.baseCCC()+this.horasExtras+this.plus) * porcentajeIRPF);
     }
 
     public float salarioNeto(float porcentajeIRPF, float porcentajeBCCC, float porcentajeParo, float porcentajeFP,
             float porcentajeHE) {
-        return this.totalDevengado() - irpf(porcentajeIRPF)
-                - seguridadSocial(porcentajeBCCC, porcentajeParo, porcentajeFP, porcentajeHE);
+        return this.totalDevengado() - this.irpf(porcentajeIRPF)
+                - this.seguridadSocial(porcentajeBCCC, porcentajeParo, porcentajeFP, porcentajeHE);
     }
 }
