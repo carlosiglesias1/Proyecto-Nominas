@@ -1,6 +1,6 @@
 package nomineando;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * La clase nomina hace uso de la clase complemento, de forma que listará los
@@ -15,14 +15,20 @@ public class Nomina {
     private int numExtras;
     private float horasExtras;
     private float plus;
-    private List<Complemento> complementos;
+    private ArrayList<Complemento> complementos = new ArrayList<Complemento>();
 
-    public Nomina(float sueldo, float plus, int extras, int numPagasExtras, List<Complemento> complementos) {
+    public Nomina(float sueldo, float plus, float extras, int numPagasExtras) {
         this.sueldoBase = sueldo;
         this.horasExtras = numPagasExtras;
         this.horasExtras = extras;
-        this.complementos = complementos;
         this.plus = plus;
+    }
+
+    public boolean addComplemento (Complemento complemento){
+        if(this.complementos.add(complemento))
+            return true;
+        else
+            return false;
     }
 
     public float pPE() {
