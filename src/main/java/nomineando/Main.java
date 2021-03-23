@@ -59,7 +59,7 @@ public class Main {
                 System.out.printf("Seguridad Social: %.2f%n",
                                 nomina.seguridadSocial(porcentajesCotizacion(textoConstructor)[1],
                                                 porcentajesCotizacion(textoConstructor)[2],
-                                                porcentajesCotizacion(textoConstructor)[3]));
+                                                porcentajesCotizacion(textoConstructor)[3], 0.02f, 0.047f));
                 System.out.printf("IRPF: %.2f%n", nomina.irpf(porcentajesCotizacion(textoConstructor)[0]));
         }
 
@@ -87,7 +87,7 @@ public class Main {
                                 nomina.salarioNeto(porcentajesCotizacion(textoConstructor)[0],
                                                 porcentajesCotizacion(textoConstructor)[1],
                                                 porcentajesCotizacion(textoConstructor)[2],
-                                                porcentajesCotizacion(textoConstructor)[3]));
+                                                porcentajesCotizacion(textoConstructor)[3], 0.02f, 0.047f));
 
                 teclado.close();
         }
