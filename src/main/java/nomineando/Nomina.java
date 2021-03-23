@@ -24,8 +24,8 @@ public class Nomina {
         this.plus = plus;
     }
 
-    public boolean addComplemento (Complemento complemento){
-        if(this.complementos.add(complemento))
+    public boolean addComplemento(Complemento complemento) {
+        if (this.complementos.add(complemento))
             return true;
         else
             return false;
@@ -57,23 +57,25 @@ public class Nomina {
     }
 
     public float baseCCC() {
-        return this.sueldoBase + this.pPE() + this.getComplementosCotizan();
+        return this.remuneracionMensual() + this.getComplementosCotizan();
     }
 
     public float baseCCP() {
         return this.baseCCC() + horasExtras;
     }
 
-    public float seguridadSocial(float porcentajeBCCC, float porcentajeBCCP, float porcentajeHE) {
-        return this.baseCCC() * porcentajeBCCC + this.baseCCP() * porcentajeBCCP + this.horasExtras * porcentajeHE;
+    public float seguridadSocial(float porcentajeBCCC, float porcentajeParo, float porcentajeFP, float porcentajeHE) {
+        return this.baseCCC() * porcentajeBCCC + this.baseCCP() * porcentajeParo + this.baseCCP() * porcentajeFP
+                + this.horasExtras * porcentajeHE;
     }
 
     public float irpf(float porcentajeIRPF) {
         return (this.sueldoBase + this.plus + this.horasExtras + this.getComplementosCotizan()) * porcentajeIRPF;
     }
 
-    public float salarioNeto(float porcentajeIRPF, float porcentajeBCCC, float porcentajeBCCP, float porcentajeHE) {
+    public float salarioNeto(float porcentajeIRPF, float porcentajeBCCC, float porcentajeParo, float porcentajeFP,
+            float porcentajeHE) {
         return this.totalDevengado() - irpf(porcentajeIRPF)
-                - seguridadSocial(porcentajeBCCC, porcentajeBCCP, porcentajeHE);
+                - seguridadSocial(porcentajeBCCC, porcentajeParo, porcentajeFP, porcentajeHE);
     }
 }

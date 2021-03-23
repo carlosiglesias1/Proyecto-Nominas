@@ -6,13 +6,13 @@ public class Complemento {
     private float cotiza;
 
     public Complemento(String tipo, float dinero, float cotizacion) {
-        String[] tipoValido = { "Transporte", "Dietas"};
+        String[] tipoValido = { "Transporte", "Dietas" };
         for (int i = 0; i < tipoValido.length; i++) {
             if (tipoValido[i].equals(tipo)) {
                 this.tipo = tipo;
                 this.cantidad = dinero;
                 this.cotiza = cotizacion;
-            }else{
+            } else {
                 this.tipo = "";
                 this.cantidad = 0.0f;
                 this.cotiza = 0.0f;
@@ -28,7 +28,7 @@ public class Complemento {
         return this.cantidad;
     }
 
-    public float getCotizacion(){
+    public float getCotizacion() {
         return this.cotiza;
     }
 }
