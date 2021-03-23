@@ -38,7 +38,7 @@ public class Nomina {
 
     public float totalDevengado() {
         float total = 0.0f;
-        total += this.sueldoBase + this.horasExtras + this.plus;
+        total += this.sueldoBase + this.horasExtras.getTotalHoras() + this.plus;
         for (int i = 0; i < complementos.size(); i++) {
             total += complementos.get(i).getDinero();
         }
@@ -62,21 +62,22 @@ public class Nomina {
     }
 
     public float baseCCP() {
-        return (this.baseCCC() + horasExtras);
+        return (this.baseCCC() + horasExtras.getTotalHoras());
     }
 
-    public float seguridadSocial(float porcentajeBCCC, float porcentajeParo, float porcentajeFP, float porcentajeHE) {
+    public float seguridadSocial(float porcentajeBCCC, float porcentajeParo, float porcentajeFP, float porcentajeHEF,
+            float porcentajeHEN) {
         return (this.baseCCC() * porcentajeBCCC + this.baseCCP() * porcentajeParo + this.baseCCP() * porcentajeFP
-                + this.horasExtras * porcentajeHE);
+                + this.horasExtras.getForzosas() * porcentajeHEF + this.horasExtras.getNormales() * porcentajeHEN);
     }
 
     public float irpf(float porcentajeIRPF) {
-        return ((this.baseCCC()+this.horasExtras+this.plus) * porcentajeIRPF);
+        return ((this.baseCCC() + this.horasExtras.getTotalHoras() + this.plus) * porcentajeIRPF);
     }
 
     public float salarioNeto(float porcentajeIRPF, float porcentajeBCCC, float porcentajeParo, float porcentajeFP,
-            float porcentajeHE) {
+            float porcentajeHEF, float porcentajeHEN) {
         return this.totalDevengado() - this.irpf(porcentajeIRPF)
-                - this.seguridadSocial(porcentajeBCCC, porcentajeParo, porcentajeFP, porcentajeHE);
+                - this.seguridadSocial(porcentajeBCCC, porcentajeParo, porcentajeFP, porcentajeHEF, porcentajeHEN);
     }
 }
