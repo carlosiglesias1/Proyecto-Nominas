@@ -19,8 +19,8 @@ public class Nomina {
 
     public Nomina(float sueldo, float plus, float extras, int numPagasExtras) {
         this.sueldoBase = sueldo;
-        this.horasExtras = numPagasExtras;
         this.horasExtras = extras;
+        this.numExtras= numPagasExtras;
         this.plus = plus;
     }
 
