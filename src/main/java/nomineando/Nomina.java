@@ -13,14 +13,15 @@ import java.util.ArrayList;
 public class Nomina {
     private float sueldoBase;
     private float plus;
+    private HorasExtras horasExtras = new HorasExtras(0f, 0f);
     private int numExtras;
-    private float horasExtras;
     private ArrayList<Complemento> complementos = new ArrayList<Complemento>();
 
-    public Nomina(float sueldo, float plus, float extras, int numPagasExtras) {
+    public Nomina(float sueldo, float plus, float importeForzosas, float importeNormales, int numPagasExtras) {
         this.sueldoBase = sueldo;
         this.plus = plus;
-        this.horasExtras = extras;
+        this.horasExtras.setForzosas(importeForzosas);
+        this.horasExtras.setNormales(importeNormales);
         this.numExtras = numPagasExtras;
     }
 
