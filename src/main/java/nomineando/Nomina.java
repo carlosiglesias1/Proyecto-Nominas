@@ -1,4 +1,4 @@
-package nominas;
+package nomineando;
 
 import java.util.ArrayList;
 
