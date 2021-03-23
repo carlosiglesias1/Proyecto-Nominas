@@ -1,4 +1,4 @@
-package nomineando;
+package nominas;
 
 public class Complemento {
     private String tipo;

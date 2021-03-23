@@ -1,4 +1,4 @@
-package nomineando;
+package nominas;
 
 public class HorasExtras {
     private float horasForzosas;

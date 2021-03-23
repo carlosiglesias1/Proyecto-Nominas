@@ -1,4 +1,4 @@
-package nomineando;
+package nominas;
 
 import java.util.Scanner;
 
