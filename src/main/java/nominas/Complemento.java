@@ -1,4 +1,4 @@
-package nomineando;
+package nominas;
 
 /**
  * @author Carlos Iglesias Gómez
