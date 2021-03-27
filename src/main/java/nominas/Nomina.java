@@ -121,7 +121,8 @@ public class Nomina {
      * @param porcentajeBCCC
      * @param porcentajeParo
      * @param porcentajeFP
-     * @param porcentajeHE
+     * @param porcentajeHorasExtrasForzosas
+     * @param porcentajeHorasExtrasNormales
      * @return resultado del calculo del salario neto
      */
     public float salarioNeto(float porcentajeIRPF, float porcentajeBCCC, float porcentajeParo, float porcentajeFP,

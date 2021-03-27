@@ -2,10 +2,20 @@ package nominas;
 
 import java.util.Scanner;
 
+/**
+ * 
+ * @author Carlos Iglesias Gomez
+ * @see Nomina
+ */
+
 public class Main {
 
         static Scanner teclado = new Scanner(System.in);
 
+        /**
+         * @param textoConstructor
+         * @return float[]
+         */
         static float[] cortarConstructorNomina(String textoConstructor) {
                 float[] parametrosPrincipales = new float[5];
                 parametrosPrincipales[0] = Float
@@ -21,6 +31,10 @@ public class Main {
                 return parametrosPrincipales;
         }
 
+        /**
+         * @param textoConstructor
+         * @return Complemento
+         */
         static Complemento crearComplemento(String textoConstructor) {
                 return new Complemento(textoConstructor.substring(0, textoConstructor.indexOf("_")),
                                 Float.parseFloat(textoConstructor.substring(textoConstructor.indexOf("_") + 1,
@@ -28,6 +42,10 @@ public class Main {
                                 Float.parseFloat(textoConstructor.substring(textoConstructor.lastIndexOf("_") + 1)));
         }
 
+        /**
+         * @param textoConstructor
+         * @return float[]
+         */
         static float[] porcentajesCotizacion(String textoConstructor) {
                 return new float[] { Float.parseFloat(textoConstructor.substring(0, textoConstructor.indexOf("_"))),
                                 Float.parseFloat(textoConstructor.substring(textoConstructor.indexOf("_") + 1,
@@ -37,7 +55,11 @@ public class Main {
                                 Float.parseFloat(textoConstructor.substring(textoConstructor.indexOf("/") + 1)) };
         }
 
-        static void añadirComplementos(int numeroComplementos, Nomina nomina) {
+        /**
+         * @param numeroComplementos
+         * @param La                 nomina a la que se le añaden los complementos
+         */
+        static void anhadirComplementos(int numeroComplementos, Nomina nomina) {
                 for (int i = 0; i < numeroComplementos; i++) {
                         System.out.println("Ahora introduce el complementos [tipo_importe_ParteDeCotizacion]");
                         String textoConstructor = teclado.nextLine();
@@ -49,6 +71,13 @@ public class Main {
                 }
         }
 
+        /**
+         * Pintar datos
+         * 
+         * @category Método
+         * @param La nomina que estamos calculando
+         * @param El texto con el que opero en todas las funciones @
+         */
         static void printData(Nomina nomina, String textoConstructor) {
                 System.out.printf("PPE: %.2f%n", nomina.pPE());
                 System.out.printf("Total Devengado: %.2f%n", nomina.totalDevengado());
@@ -63,6 +92,9 @@ public class Main {
                 System.out.printf("IRPF: %.2f%n", nomina.irpf(porcentajesCotizacion(textoConstructor)[0]));
         }
 
+        /**
+         * {@literal} Función principal
+         */
         public static void main(String[] args) {
                 Nomina nomina;
                 String textoConstructor = "";
@@ -76,7 +108,7 @@ public class Main {
                                 (int) (cortarConstructorNomina(textoConstructor)[4]));
 
                 System.out.println("Cuántos complementos tiene la nómina?");
-                añadirComplementos(Integer.parseInt(teclado.nextLine()), nomina);
+                anhadirComplementos(Integer.parseInt(teclado.nextLine()), nomina);
 
                 System.out.println("Con que porcentajes tengo que trabajar? [IRPF_BCCC_Paro/FP]");
                 textoConstructor = teclado.nextLine();
